@@ -17,7 +17,7 @@ rcParams['figure.figsize'] = 12, 9
 
 # COMMAND ----------
 
-TREASURY_BILL_RATE = 0.11  #%, Jan 2021
+TREASURY_BILL_RATE = 3.29  #%, Jan 2021
 TRADING_DAYS_PER_YEAR = 250
 
 # COMMAND ----------
@@ -148,7 +148,7 @@ def yf_retrieve_data(tickers: List[str]):
 
   for ticker_name in tickers:
     ticker = yf.Ticker(ticker_name)
-    history = ticker.history(period='10y')
+    history = ticker.history(period='5y')
 
     if history.isnull().any(axis=1).iloc[0]:  # the first row can have NaNs
       history = history.iloc[1:]
@@ -160,7 +160,7 @@ def yf_retrieve_data(tickers: List[str]):
 
 # COMMAND ----------
 
-stocks = ['AAPL', 'AMZN', 'GOOG', 'KOF', 'JNJ', 'JPM']
+stocks = ['AAPL', 'AMZN', 'GOOG', 'KOF', 'STLA', 'IBA']
 
 daily_dataframes = yf_retrieve_data(stocks)
 assets = tuple([Asset(name, daily_df) for name, daily_df in zip(stocks, daily_dataframes)])
