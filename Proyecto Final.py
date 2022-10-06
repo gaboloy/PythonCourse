@@ -160,7 +160,7 @@ def yf_retrieve_data(tickers: List[str]):
 
 # COMMAND ----------
 
-stocks = ['AAPL', 'AMZN', 'GOOG', 'KOF', 'STLA', 'IBA']
+stocks = ['AAPL', 'AMZN', 'CK0.SG', 'KOF', 'STLA', 'AC.MX']
 
 daily_dataframes = yf_retrieve_data(stocks)
 assets = tuple([Asset(name, daily_df) for name, daily_df in zip(stocks, daily_dataframes)])
@@ -199,8 +199,8 @@ plt.plot(np.sqrt(portfolio.variance), portfolio.expected_return, 'm+', markeredg
 portfolio.optimize_with_risk_tolerance(20)
 plt.plot(np.sqrt(portfolio.variance), portfolio.expected_return, 'r+', markeredgewidth=5, markersize=20, label='optimize_with_risk_tolerance(20)')
 
-#portfolio.optimize_with_expected_return(0.25)
-#plt.plot(np.sqrt(portfolio.variance), portfolio.expected_return, 'g+', markeredgewidth=5, markersize=20, label='optimize_with_expected_return(0.25)')
+portfolio.optimize_with_expected_return(0.15)
+plt.plot(np.sqrt(portfolio.variance), portfolio.expected_return, 'g+', markeredgewidth=5, markersize=20, label='optimize_with_expected_return(0.25)')
 
 portfolio.optimize_sharpe_ratio()
 plt.plot(np.sqrt(portfolio.variance), portfolio.expected_return, 'y+', markeredgewidth=5, markersize=20, label='optimize_sharpe_ratio()')
@@ -223,7 +223,7 @@ riskless_weights = portfolio.weights.flatten()
 portfolio.optimize_with_risk_tolerance(20)
 weights_risk_tolerance = portfolio.weights.flatten()
 
-#portfolio.optimize_with_expected_return(0.25)
+portfolio.optimize_with_expected_return(0.15)
 weights_return = portfolio.weights.flatten()
 
 portfolio.optimize_sharpe_ratio()
@@ -244,7 +244,7 @@ display(
       'asset',
       'optimize_with_risk_tolerance(0)',
       'optimize_with_risk_tolerance(20)',
-      'optimize_with_expected_return(0.25)',
+      'optimize_with_expected_return(0.15)',
       'optimize_sharpe_ratio()',
     ],
   )
