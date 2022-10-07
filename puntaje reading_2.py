@@ -83,3 +83,5 @@ plt.xticks(rotation=45)
 
 
 sns.barplot(data=calificaciones, x="index", y="Student ID")
+
+

@@ -55,23 +55,9 @@ df.head()
 
 # COMMAND ----------
 
-calificaciones = df.groupby(["school_name","grade","gender","cat_read",]).agg({"Student ID":"count"}).reset_index()
+calificaciones = df.groupby(["school_name","gender","cat_read",]).agg({"Student ID":"count"}).reset_index()
 
 calificaciones = calificaciones[calificaciones["cat_read"]=="génie"]
-
-# COMMAND ----------
-
-#df["last_name"] = df["student_name"].map(lambda x: x.split(" ")[1])
-#af = df.groupby(["school_name","last_name","transform_reading_score"]).agg({"Student ID":"count"}).reset_index()
-#af = af[af["transform_reading_score"]=="excelente"]
-
-
-
-calificaciones["index"] = calificaciones["school_name"]+" "+calificaciones["grade"]
-
-
-
-calificaciones = calificaciones.sort_values("Student ID").tail(50)
 
 # COMMAND ----------
 
@@ -79,7 +65,18 @@ calificaciones = calificaciones.sort_values("Student ID").tail(50)
 plt.figure(figsize = (33,8))
 
 
-plt.xticks(rotation=45)
+sns.barplot(data=calificaciones, x="school_name", y="Student ID", hue="gender")
+
+# COMMAND ----------
+
+calificaciones = df.groupby(["school_name","gender","cat_read",]).agg({"Student ID":"count"}).reset_index()
+
+calificaciones = calificaciones[calificaciones["cat_read"]=="pas suffisant"]
+
+# COMMAND ----------
+
+plt.figure(figsize = (33,8))
 
 
-sns.barplot(data=calificaciones, x="index", y="Student ID")
+sns.barplot(data=calificaciones, x="school_name", y="Student ID", hue="gender")
+
